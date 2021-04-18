@@ -1,7 +1,21 @@
 var db = require("../Models");
+var path = require("path")
 
-module.exports = function(app) {
-  app.get("/api/workouts", function(req, res) {
+module.exports = function (app) {
+
+  app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  });
+
+  app.get("/exercise", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/exercise.html"));
+  });
+
+  app.get("/stats", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/stats.html"));
+  });
+
+  app.get("/api/workouts", function (req, res) {
     db.Workout.find({})
       .then(dbWorkout => {
         res.json(dbWorkout);
@@ -11,7 +25,7 @@ module.exports = function(app) {
       });
   });
 
-  app.put("/api/workouts/:id", function({body, params}, res) {
+  app.put("/api/workouts/:id", function ({ body, params }, res) {
     db.Workout.findByIdAndUpdate(
       params.id,
       { $push: { exercises: body } },
@@ -35,7 +49,7 @@ module.exports = function(app) {
       });
   });
 
-  app.get("/api/workouts/range", function(req, res) {
+  app.get("/api/workouts/range", function (req, res) {
     db.Workout.find({}).limit(5)
       .then(dbWorkout => {
         res.json(dbWorkout);
