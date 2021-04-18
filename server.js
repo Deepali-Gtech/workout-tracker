@@ -3,7 +3,9 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 
 var PORT = process.env.PORT || 3000;
-var db = require("./Models");
+
+// Database models
+var db = require("./models");
 
 var app = express();
 app.use(express.urlencoded({ extended: true }));
