@@ -1,6 +1,7 @@
-var db = require("../Models");
+var db = require("../models");
 var path = require("path")
 
+// Paths
 module.exports = function (app) {
 
   app.get("/", function (req, res) {
